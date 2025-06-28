@@ -1,4 +1,3 @@
-
 <?php
 
 //dados de ligação à BD
@@ -186,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registar']))
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
         
-   //echo $email;
+
 
         // Validar EMAIL
            $email = filter_var(trim($email), FILTER_SANITIZE_EMAIL);
@@ -279,7 +278,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registar']))
         }
 
 
-        //echo $password;
+     
         
         // Validações da senha
         if (strlen($password) < 8) {
@@ -415,8 +414,12 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
     $qr_code_url = SimpleTOTP::getQRCodeUrl($_SESSION['temp_email'], $_SESSION['temp_mfa_secret']);
     $show_mfa_setup = true;
 }
-
 ?>
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -425,36 +428,36 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            padding: 20px; 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
-        .container { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1); 
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
-        .form { 
-            background: #f8f9ff; 
-            padding: 25px; 
-            margin: 20px 0; 
-            border-radius: 12px; 
-            border-left: 5px solid #667eea; 
+        .form {
+            background: #f8f9ff;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
         }
-        input { 
-            padding: 15px; 
-            margin: 10px 0; 
-            width: 100%; 
-            max-width: 350px; 
-            border: 2px solid #e1e5e9; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
+        input {
+            padding: 15px;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 350px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            box-sizing: border-box;
             font-size: 16px;
             transition: border-color 0.3s;
         }
@@ -462,19 +465,19 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
             outline: none;
             border-color: #667eea;
         }
-        button { 
-            padding: 15px 30px; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            color: white; 
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-size: 16px; 
+        button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
             font-weight: 600;
-            margin-top: 15px; 
+            margin-top: 15px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        button:hover { 
+        button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
@@ -486,60 +489,60 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
             background: #5a6268;
             box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
         }
-        .message { 
-            padding: 18px; 
-            margin: 20px 0; 
-            border-radius: 8px; 
+        .message {
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 8px;
             font-weight: 500;
         }
-        .error { 
-            background: #ffe6e6; 
-            border: 2px solid #ff9999; 
-            color: #cc0000; 
+        .error {
+            background: #ffe6e6;
+            border: 2px solid #ff9999;
+            color: #cc0000;
         }
-        .success { 
-            background: #e6ffe6; 
-            border: 2px solid #99ff99; 
-            color: #008000; 
+        .success {
+            background: #e6ffe6;
+            border: 2px solid #99ff99;
+            color: #008000;
         }
         .info {
             background: #e6f3ff;
             border: 2px solid #99ccff;
             color: #0066cc;
         }
-        .qr-container { 
-            text-align: center; 
-            margin: 25px 0; 
-            padding: 25px; 
-            background: white; 
-            border-radius: 12px; 
-            border: 3px dashed #667eea; 
+        .qr-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            border: 3px dashed #667eea;
         }
         .qr-container img {
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .user-info { 
-            background: linear-gradient(135deg, #d4edda, #c3e6cb); 
-            padding: 25px; 
-            border-radius: 12px; 
-            margin-bottom: 25px; 
+        .user-info {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
             border-left: 5px solid #28a745;
         }
-        .instructions { 
-            background: #fff8e1; 
-            border: 2px solid #ffcc02; 
-            padding: 20px; 
-            border-radius: 8px; 
-            margin: 20px 0; 
+        .instructions {
+            background: #fff8e1;
+            border: 2px solid #ffcc02;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
         }
         .instructions ol li {
             margin: 8px 0;
             font-weight: 500;
         }
-        h1 { 
-            color: #333; 
-            text-align: center; 
+        h1 {
+            color: #333;
+            text-align: center;
             font-size: 2.5em;
             margin-bottom: 30px;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -547,9 +550,9 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        h3 { 
-            color: #667eea; 
-            margin-top: 0; 
+        h3 {
+            color: #667eea;
+            margin-top: 0;
             font-size: 1.4em;
         }
         .secret-display {
@@ -783,12 +786,12 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
            
          <div class="other-fields">
                 <label for="email" class="field-label">📧 Email</label>
-                <input type="email" 
+                <input type="email"
                        id="email"
-                       name="email" 
+                       name="email"
                        class="email-input"
-                       placeholder="exemplo@dominio.com" 
-                       required 
+                       placeholder="exemplo@dominio.com"
+                       required
                        maxlength="254"
                        autocomplete="email"
                        autocapitalize="none"
@@ -805,12 +808,12 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
  <!-- Campo de Senha Principal -->
             <div class="password-field">
                 <label for="password" class="field-label">🔒 Senha</label>
-                <input type="password" 
+                <input type="password"
                        id="password"
-                       name="password" 
+                       name="password"
                        class="password-input"
-                       placeholder="Digite sua senha segura" 
-                       required 
+                       placeholder="Digite sua senha segura"
+                       required
                        minlength="8"
                        maxlength="128"
                        autocomplete="new-password"
@@ -838,12 +841,12 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
             <!-- Campo de Confirmação de Senha -->
             <div class="password-field">
                 <label for="confirm_password" class="field-label">🔒 Confirmar Senha</label>
-                <input type="password" 
+                                <input type="password"
                        id="confirm_password"
-                       name="confirm_password" 
+                       name="confirm_password"
                        class="password-input"
-                       placeholder="Digite novamente sua senha" 
-                       required 
+                       placeholder="Digite novamente sua senha"
+                       required
                        minlength="8"
                        maxlength="128"
                        autocomplete="new-password"
@@ -1117,7 +1120,7 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
            } else {
              x.type = "password";
            }
-         } 
+         }
          </script>
 
 
