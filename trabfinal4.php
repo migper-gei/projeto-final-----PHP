@@ -736,7 +736,7 @@ if (isset($_POST['testar_codigo']) && isset($_SESSION['temp_mfa_secret'])) {
                     <p><strong>📋 Passos para configurar:</strong></p>
                     <ol>
                         <li>📲 Instale uma app autenticadora (Google Authenticator, Authy, etc.)</li>
-                        <li>📷 Escaneie o QR-Code abaixo com a app</li>
+                        <li>📷 Digitaliza o QR-Code abaixo com a app</li>
                         <li>🔢 Insira o código de 6 dígitos gerado pela app</li>
                         <li>✅ Confirme para ativar o MFA</li>
                     </ol>
